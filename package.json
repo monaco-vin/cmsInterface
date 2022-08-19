@@ -1,5 +1,5 @@
 {
-  "name": "main",
+  "name": "cmsinterface",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
@@ -13,7 +13,6 @@
   "dependencies": {
     "express": "^4.17.1",
     "jshint": "^2.12.0",
-    "mysql": "^2.18.1",
-    "mysql2": "^2.2.5"
+    "mysql": "^8.0.30"
   }
 }
