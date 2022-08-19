@@ -28,3 +28,5 @@ app.get("/createDB", (req, res) => {
     res.send("Database Created");
   });
 });
+
+//Create table
