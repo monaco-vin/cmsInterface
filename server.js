@@ -212,3 +212,49 @@ const addDepartment = () => {
       );
     });
 };
+
+//Update employee role: which employee - select new role
+const updateRole = () => {
+  db.query("SELECT * FROM employee ORDER BY first_name", (err, res) => {
+    let employee = res.map((employee) => {
+      return {
+        name: employee.first_name + " " + employee.last_name,
+        value: employee.id,
+      };
+    });
+    db.query("SELECT * FROM roles ORDER BY title", (err, res) => {
+      let roles = res.map((role) => {
+        return {
+          name: role.title,
+          value: role.id,
+        };
+      });
+      inquirer
+        .prompt([
+          {
+            type: "list",
+            name: "updateEmployee",
+            message: " Please enter employees name.",
+            choices: employee,
+          },
+          {
+            type: "list",
+            name: "newRole",
+            message: "What is the employee's new role?",
+            choices: roles,
+          },
+        ])
+        .then((res) => {
+          db.query(
+            "UPDATE employee SET role_id = ? WHERE id = ?",
+            [res.newRole, res.updateEmployee],
+            function (err) {
+              if (err) throw err;
+              console.table(res);
+              startPrompt();
+            }
+          );
+        });
+    });
+  });
+};
