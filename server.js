@@ -93,10 +93,10 @@ const addEmployee = () => {
         name: "role",
         message: "What is the employee's ID?",
       },
-      //Manager ID
+      //Manager Id
       {
         type: "input",
-        name: "managerID",
+        name: "managerId",
         message: "What is the employee's manager's ID?",
       },
     ])
@@ -108,6 +108,75 @@ const addEmployee = () => {
           last_name: res.lastName,
           role_id: res.role,
           manager_id: res.managerID,
+        },
+        (err, res) => {
+          if (err) throw err;
+          console.table(res);
+          startPrompt();
+        }
+      );
+    });
+};
+
+//Add role: name of role - salary of role - department role belongs to
+const addRole = () => {
+  return inquirer
+    .prompt([
+      //Role title
+      {
+        type: "input",
+        name: "title",
+        message: "What is the role title?",
+
+        //Validate values throughout the prompted questions
+        validate: (nameInput) => {
+          if (nameInput) {
+            return true;
+          } else {
+            return false;
+          }
+        },
+      },
+
+      //Salary
+      {
+        type: "input",
+        name: "salary",
+        message: "What is the role's salary?",
+
+        //Validate values throughout the prompted questions
+        validate: (nameInput) => {
+          if (nameInput) {
+            return true;
+          } else {
+            return false;
+          }
+        },
+      },
+
+      //Department
+      {
+        type: "input",
+        name: "deptId",
+        message: "What department does the role belong to?",
+
+        //Validate values throughout the prompted questions
+        validate: (nameInput) => {
+          if (nameInput) {
+            return true;
+          } else {
+            return false;
+          }
+        },
+      },
+    ])
+    .then((res) => {
+      db.query(
+        "INSERT INTO roles SET ?",
+        {
+          title: res.title,
+          salary: res.salary,
+          dept_id: res.dept_id,
         },
         (err, res) => {
           if (err) throw err;
