@@ -93,6 +93,7 @@ const addEmployee = () => {
         name: "role",
         message: "What is the employee's ID?",
       },
+
       //Manager Id
       {
         type: "input",
@@ -179,6 +180,31 @@ const addRole = () => {
           dept_id: res.dept_id,
         },
         (err, res) => {
+          if (err) throw err;
+          console.table(res);
+          startPrompt();
+        }
+      );
+    });
+};
+
+//Add department
+const addDepartment = () => {
+  return inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "department",
+        message: "What is the name of the department?",
+      },
+    ])
+    .then(function (res) {
+      db.query(
+        "INSERT INTO departments SET ?",
+        {
+          dept_name: res.department,
+        },
+        function (err) {
           if (err) throw err;
           console.table(res);
           startPrompt();
