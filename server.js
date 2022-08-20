@@ -68,3 +68,52 @@ startPrompt = () => {
       }
     });
 };
+
+//Add employee: first name - last name - employee role (select from list?) - employee's manager
+const addEmployee = () => {
+  inquirer
+    .prompt([
+      //First name
+      {
+        type: "input",
+        name: "firstName",
+        message: "What is the employee's first name?",
+      },
+
+      //Last name
+      {
+        type: "input",
+        name: "lastName",
+        message: "What is the employee's last name?",
+      },
+
+      //Employee role
+      {
+        type: "input",
+        name: "role",
+        message: "What is the employee's ID?",
+      },
+      //Manager ID
+      {
+        type: "input",
+        name: "managerID",
+        message: "What is the employee's manager's ID?",
+      },
+    ])
+    .then((res) => {
+      db.query(
+        "INSERT INTO employee SET ?",
+        {
+          first_name: res.firstName,
+          last_name: res.lastName,
+          role_id: res.role,
+          manager_id: res.managerID,
+        },
+        (err, res) => {
+          if (err) throw err;
+          console.table(res);
+          startPrompt();
+        }
+      );
+    });
+};
