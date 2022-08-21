@@ -258,3 +258,28 @@ const updateRole = () => {
     });
   });
 };
+
+//View all: employees, roles, departments
+function viewAllEmployees() {
+  db.query("SELECT * FROM employee;", (err, res) => {
+    if (err) throw err;
+    console.table(res);
+    startPrompt();
+  });
+}
+
+function viewAllRoles() {
+  db.query("SELECT * FROM roles;", (err, res) => {
+    if (err) throw err;
+    console.table(res);
+    startPrompt();
+  });
+}
+
+function viewAllDepartments() {
+  db.query("SELECT * FROM departments;", (err, res) => {
+    if (err) throw err;
+    console.table(res);
+    startPrompt();
+  });
+}
