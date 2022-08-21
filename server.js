@@ -269,7 +269,7 @@ function viewAllEmployees() {
 }
 
 function viewAllRoles() {
-  db.query("SELECT * FROM roles;", (err, res) => {
+  db.query("SELECT * FROM role;", (err, res) => {
     if (err) throw err;
     console.table(res);
     startPrompt();
@@ -277,7 +277,7 @@ function viewAllRoles() {
 }
 
 function viewAllDepartments() {
-  db.query("SELECT * FROM departments;", (err, res) => {
+  db.query("SELECT * FROM department;", (err, res) => {
     if (err) throw err;
     console.table(res);
     startPrompt();
