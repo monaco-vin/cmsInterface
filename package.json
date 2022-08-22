@@ -11,9 +11,8 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "express": "^4.17.1",
-    "mysql": "^2.18.1",
     "console.table": "^0.10.0",
+    "express": "^4.17.1",
     "inquirer": "^7.0.0",
     "mysql2": "^2.3.3"
   }

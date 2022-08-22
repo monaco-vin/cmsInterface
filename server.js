@@ -1,5 +1,5 @@
 const express = require("express");
-const mysql = require("mysql");
+const mysql = require("mysql2");
 const inquirer = require("inquirer");
 const app = express();
 
@@ -7,7 +7,7 @@ const app = express();
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "bootcamp",
+  password: "",
   database: "employee_db",
 });
 
@@ -159,7 +159,7 @@ const addRole = () => {
       {
         type: "input",
         name: "deptId",
-        message: "What department does the role belong to?",
+        message: "Department ID number?",
 
         //Validate values throughout the prompted questions
         validate: (nameInput) => {
@@ -173,11 +173,11 @@ const addRole = () => {
     ])
     .then((res) => {
       db.query(
-        "INSERT INTO roles SET ?",
+        "INSERT INTO role SET ?",
         {
           title: res.title,
           salary: res.salary,
-          dept_id: res.dept_id,
+          department_id: res.deptId,
         },
         (err, res) => {
           if (err) throw err;
@@ -200,7 +200,7 @@ const addDepartment = () => {
     ])
     .then(function (res) {
       db.query(
-        "INSERT INTO departments SET ?",
+        "INSERT INTO department SET ?",
         {
           dept_name: res.department,
         },
@@ -222,7 +222,7 @@ const updateRole = () => {
         value: employee.id,
       };
     });
-    db.query("SELECT * FROM roles ORDER BY title", (err, res) => {
+    db.query("SELECT * FROM role ORDER BY title", (err, res) => {
       let roles = res.map((role) => {
         return {
           name: role.title,
