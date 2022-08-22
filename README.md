@@ -9,6 +9,9 @@ Install Node.js if you do not already have it installed. Download the repository
 USAGE:
 Type "npm start" into your command line program once you have navigated to the program's directory. Answer the prompts to display and update your tables.
 
+    DEMO:
+    https://youtu.be/0TvPe7lX4cs
+
 CONTRIBUTORS:
 Vincent Monaco
 
